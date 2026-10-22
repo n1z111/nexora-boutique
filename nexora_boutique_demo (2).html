@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXORA — Chambre & Bureau</title>
+<style>
+:root{--ink:#20231f;--muted:#6f756d;--cream:#f6f4ee;--green:#dce8d9;--accent:#45634b;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--ink)}
+header{padding:20px 6%;display:flex;align-items:center;justify-content:space-between;background:#fff;gap:16px;position:sticky;top:0;z-index:3;border-bottom:1px solid #e9e8e1}
+.logo{font-weight:900;letter-spacing:3px;font-size:22px}.logo span{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:4px}
+button{border:0;border-radius:999px;padding:12px 18px;background:var(--accent);color:white;font-weight:bold;cursor:pointer}button:hover{opacity:.88}.ghost{background:#f0f2ec;color:var(--ink)}
+.hero{padding:65px 6%;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center;background:var(--green)}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:bold;color:var(--accent)}
+h1{font-size:clamp(36px,5vw,64px);line-height:1.02;letter-spacing:-2px;margin:15px 0}p{line-height:1.6;color:var(--muted)}
+.hero-art{min-height:300px;border-radius:24px;background:linear-gradient(145deg,#f4e5d1,#b6c5b0);display:flex;align-items:center;justify-content:center;font-size:100px;box-shadow:inset 0 0 0 1px #ffffff70}
+.notice{margin:20px 6% 0;padding:12px 16px;border:1px solid #d7d6ca;background:#fff9dc;border-radius:12px;font-size:13px;color:#675b2b}
+section{padding:45px 6%}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}h2{font-size:30px;margin:0 0 8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.product{background:white;border-radius:18px;padding:14px;box-shadow:0 4px 18px #1d291008}.product-art{height:180px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:70px;background:#f0eee6}.product:nth-child(2) .product-art{background:#e5e9e0}.product:nth-child(3) .product-art{background:#e8e0d8}
+.product h3{margin:14px 0 5px}.product p{font-size:13px;margin:0 0 12px}.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:800;font-size:18px}.small{font-size:12px;color:var(--muted)}
+footer{padding:28px 6%;background:#202720;color:#fff;font-size:13px}footer p{color:#d0d5ce}
+.cart-panel{position:fixed;right:16px;bottom:16px;width:min(360px,calc(100vw - 32px));background:#fff;border-radius:18px;padding:18px;box-shadow:0 12px 50px #0002;z-index:5;display:none}.cart-panel.open{display:block}.cart-head{display:flex;justify-content:space-between;align-items:center}.cart-list{max-height:180px;overflow:auto;padding:0;list-style:none}.cart-list li{padding:8px 0;border-bottom:1px solid #eee;font-size:14px}.cart-total{font-weight:bold;margin:14px 0}.close{background:#eee;color:#222;padding:7px 11px}
+@media(max-width:700px){.hero{grid-template-columns:1fr;padding-top:42px}.hero-art{min-height:200px}.grid{grid-template-columns:1fr}.product-art{height:150px}.section-head{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="logo">NEXORA<span>CHAMBRE & BUREAU</span></div><button class="ghost" onclick="toggleCart()">Panier (<span id="count">0</span>)</button></header>
+<main>
+<div class="hero"><div><div class="eyebrow">Un espace qui te ressemble</div><h1>Rends ton espace<br>plus inspirant.</h1><p>Des idées simples pour une chambre cosy et un bureau bien organisé. Découvre notre sélection de démonstration.</p><button onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'})">Découvrir les produits</button></div><div class="hero-art" aria-label="Illustration décorative">🪴 💡</div></div>
+<div class="notice">Boutique de démonstration : les produits, prix et commandes sont fictifs. Aucun paiement ni achat réel n’est possible.</div>
+<section id="produits"><div class="section-head"><div><div class="eyebrow">La sélection</div><h2>Petits objets, grand effet</h2><p>Des idées pour aménager ton coin préféré.</p></div></div>
+<div class="grid">
+<article class="product"><div class="product-art">🗂️</div><h3>Organisateur de bureau</h3><p>Pour garder stylos et accessoires à portée de main.</p><div class="price-row"><span class="price">14,90 €</span><button onclick="addToCart('Organisateur de bureau',14.90)">Ajouter</button></div></article>
+<article class="product"><div class="product-art">💡</div><h3>Lampe d’ambiance</h3><p>Une lumière douce pour travailler ou se détendre.</p><div class="price-row"><span class="price">24,90 €</span><button onclick="addToCart('Lampe d’ambiance',24.90)">Ajouter</button></div></article>
+<article class="product"><div class="product-art">🪴</div><h3>Pot décoratif</h3><p>Une petite touche végétale pour ton espace.</p><div class="price-row"><span class="price">9,90 €</span><button onclick="addToCart('Pot décoratif',9.90)">Ajouter</button></div></article>
+</div></section>
+</main>
+<footer><strong>NEXORA</strong><p>Maquette d’apprentissage — pas de vente réelle, pas de paiement, pas de collecte de données.</p></footer>
+<div id="cart" class="cart-panel" role="dialog" aria-label="Panier de démonstration"><div class="cart-head"><h3>Ton panier test</h3><button class="close" onclick="toggleCart()">Fermer</button></div><p class="small">Ceci est une simulation : rien n’est commandé.</p><ul class="cart-list" id="cartList"></ul><div class="cart-total" id="total">Total test : 0,00 €</div><button class="ghost" onclick="clearCart()">Vider le panier</button></div>
+<script>
+const items=[];const money=n=>n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+function addToCart(name,price){items.push({name,price});renderCart();document.getElementById('cart').classList.add('open')}
+function renderCart(){document.getElementById('count').textContent=items.length;document.getElementById('cartList').innerHTML=items.length?items.map((x,i)=>`<li>${x.name} — ${money(x.price)} <button class="close" onclick="removeItem(${i})">×</button></li>`).join(''):'<li>Ton panier est vide.</li>';document.getElementById('total').textContent='Total test : '+money(items.reduce((s,x)=>s+x.price,0))}
+function removeItem(i){items.splice(i,1);renderCart()}function clearCart(){items.length=0;renderCart()}function toggleCart(){document.getElementById('cart').classList.toggle('open')}renderCart();
+</script>
+</body>
+</html>
